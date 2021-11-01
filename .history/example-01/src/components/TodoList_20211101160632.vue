@@ -55,11 +55,8 @@ function useTodos() {
             })
         }
     })
-
-    return {title,todos,addTodo,clear,active,all,allDone}
 }
 
-let {title,todos,addTodo,clear,active,all,allDone} = useTodos()
 
 
 </script>
