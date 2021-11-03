@@ -7,9 +7,9 @@
     <div><button @click="toggle">全屏</button></div>
     <Counter></Counter>
     <br />
-    <Rate :value="score"></Rate>
-    <Rate :value="2" theme="red"></Rate>
-    <Rate :value="5" theme="green"></Rate>
+    <Rate :value="score" @update-rate="update"></Rate>
+    <!-- <Rate :value="2" theme="red"></Rate> -->
+    <!-- <Rate :value="5" theme="green"></Rate> -->
 
 </template>
 
@@ -29,7 +29,11 @@ function loading() {
 }
 
 const {isFullscreen,enter,exit,toggle} = useFullscreen()
-let score = ref(3)
+let score = ref(3.5)
+
+function update(num) {
+    score.value = num
+}
 
 
 </script>

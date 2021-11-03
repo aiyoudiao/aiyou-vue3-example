@@ -1,21 +1,28 @@
 <template>
-    <div :style="fontStyle">{{ rate }}</div>
+    <div :style="fontStyle">
+        <div class="rate" @mouseout="mouseOut">
+            <span @mouseover="mouseOver(num)" v-for="num in 5" :key="num">☆</span>
+            <span class="hollow" :style="fontWidth">
+                <span @click="onRate(num)" @mouseover="mouseOver(num)" v-for="num in 5" :key="num">★</span>
+            </span>
+        </div>
+    </div>
 </template>
 
 <script setup>
 
-import { defineProps, computed } from 'vue'
+import { defineProps, computed, ref, defineEmits } from 'vue'
 
 let props = defineProps({
     value: Number,
     theme: {
-        type:String,
-        default:'orange'
+        type: String,
+        default: 'orange'
     }
 })
-let rate = computed(() => "★★★★★☆☆☆☆☆".slice(5 - props.value, 10 - props.value))
+// let rate = computed(() => "★★★★★☆☆☆☆☆".slice(5 - props.value, 10 - props.value))
 
-const themeObj={
+const themeObj = {
     'black': '#000',
     'white': '#fff',
     'red': '#f5222d',
@@ -25,9 +32,24 @@ const themeObj={
     'blue': '#40a9ff'
 }
 
-const fontStyle = computed(()=>{
+const fontStyle = computed(() => {
     return `color:${themeObj[props.theme]};`
 })
+
+let width = ref(props.value)
+function mouseOver(i) {
+    width.value = i
+}
+function mouseOut() {
+    width.value = props.value
+}
+
+const fontWidth = computed(() => `width:${width.value}em;`)
+
+let emits = defineEmits('update-rate')
+function onRate(num) {
+    emits('update-rate', num)
+}
 
 </script>
 
@@ -35,5 +57,18 @@ const fontStyle = computed(()=>{
 div {
     font-size: 35px;
     text-align: center;
+}
+
+.rate {
+    position: relative;
+    display: inline-block;
+}
+.rate > span.hollow {
+    position: absolute;
+    display: inline-block;
+    top:0;
+    left:0;
+    width:0;
+    overflow: hidden;
 }
 </style>
