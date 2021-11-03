@@ -20,10 +20,11 @@
 <script setup>
 
 import { ref, computed } from 'vue';
+import {useStorage} from '../utils/useStorage'
 
 function useTodos() {
     let title = ref("")
-    let todos = ref([
+    let todos = useStorage('todos',[
         { title: '学习Vue', done: false },
         { title: '学习React', done: false },
     ])
