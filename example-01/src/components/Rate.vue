@@ -1,5 +1,6 @@
 <template>
     <div :style="fontStyle">
+        <slot></slot>
         <div class="rate" @mouseout="mouseOut">
             <span @mouseover="mouseOver(num)" v-for="num in 5" :key="num">☆</span>
             <span class="hollow" :style="fontWidth">
@@ -14,7 +15,7 @@
 import { defineProps, computed, ref, defineEmits } from 'vue'
 
 let props = defineProps({
-    value: Number,
+    modelValue: Number,
     theme: {
         type: String,
         default: 'orange'
@@ -36,17 +37,18 @@ const fontStyle = computed(() => {
     return `color:${themeObj[props.theme]};`
 })
 
-let width = ref(props.value)
+let width = ref(props.modelValue)
 function mouseOver(i) {
     width.value = i
 }
 function mouseOut() {
-    width.value = props.value
+    width.value = props.modelValue
 }
 
 const fontWidth = computed(() => `width:${width.value}em;`)
 
-let emits = defineEmits('update-rate')
+// let emits = defineEmits('update-rate')
+let emits = defineEmits(['update:modelValue'])
 function onRate(num) {
     emits('update-rate', num)
 }

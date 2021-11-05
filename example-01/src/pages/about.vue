@@ -7,7 +7,8 @@
     <div><button @click="toggle">全屏</button></div>
     <Counter></Counter>
     <br />
-    <Rate :value="score" @update-rate="update"></Rate>
+    <!-- <Rate :value="score" @update-rate="update"></Rate> -->
+    <Rate v-model="score" @update-rate="update">课程评分</Rate>
     <!-- <Rate :value="2" theme="red"></Rate> -->
     <!-- <Rate :value="5" theme="green"></Rate> -->
 
