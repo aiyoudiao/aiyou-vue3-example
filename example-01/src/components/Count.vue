@@ -8,9 +8,12 @@
 
 <script setup>
 import {computed} from 'vue'
-import { useStore } from 'vuex';
+import { useStore } from '../store/gvuex.js';
 let store = useStore()
+console.log('store', store)
+
 let count = computed(()=>store.state.count)
+// let double = computed(()=>store.getters.double)
 
 function add(){
     store.commit('add')
