@@ -10,7 +10,7 @@
     "@vueuse/core": "^6.7.4",
     "vue": "^3.2.16",
     "vue-router": "^4.0.12",
-    "vuex": "^3.6.2"
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.3",
