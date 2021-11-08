@@ -4,16 +4,6 @@
             <div class="info">哥，你啥也没输入！</div>
         </div>
     </transition>
-    <span class="dustbin">
-        🗑
-    </span>
-    <div class="animate-wrap">
-        <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
-           <div class="animate" v-show="animate.show">
-               📝
-           </div>
-        </transition>
-    </div>
     <div>
         <input type="text" v-model="title" @keydown.enter="addTodo" />
         <button v-if="active < all" @click="clear">清理</button>
@@ -37,7 +27,7 @@
 
 <script setup>
 
-import { ref, computed, reactive } from 'vue';
+import { ref, computed } from 'vue';
 import { useStorage } from '../utils/useStorage'
 
 function useTodos() {
@@ -64,6 +54,10 @@ function useTodos() {
         title.value = ""
     }
 
+    function removeTodo (e,i) {
+        todos.value.splice(i,1)
+    }
+
     function clear() {
         todos.value = todos.value.filter((v) => !v.done)
     }
@@ -84,34 +78,10 @@ function useTodos() {
         }
     })
 
-    let animate = reactive({show:false,el:null})
-
-    function beforeEnter(el) {
-        let dom = animate.el
-        let rect = dom.getBoundingClientRect()
-        let x = window.innerWidth
-        let y = rect.top - 10
-        el.style.transform = `translate(-${x}px,${y}px)`
-    }
-    function enter(el,done) {
-        document.body.offsetHeight
-        el.style.transform = `translate(0,0)`
-        el.addEventListener('transitionend', done)
-    }
-    function afterEnter(el) {
-        animate.show = false
-        el.style.display = 'none'
-    }
-    function removeTodo(e,i) {
-        animate.el = e.target
-        animate.show = true
-        todos.value.splice(i,1)
-    }
-
-    return { title, todos, addTodo, clear, active, all, allDone, showModal, removeTodo, beforeEnter, enter, afterEnter, animate }
+    return { title, todos, addTodo, clear, active, all, allDone, showModal, removeTodo }
 }
 
-let { title, todos, addTodo, clear, active, all, allDone, showModal, removeTodo, beforeEnter, enter, afterEnter, animate } = useTodos()
+let { title, todos, addTodo, clear, active, all, allDone, showModal, removeTodo } = useTodos()
 
 
 
@@ -166,20 +136,4 @@ h1 {
     opacity: 0;
     transform: translateX(30px);
 }
-
-.animate-wrap .animate {
-    position: fixed;
-    right: 10px;
-    top: 10px;
-    z-index: 100;
-    transition: all .5s linear;
-}
-
-.dustbin {
-    font-size: 50px;
-    position: fixed;
-    right: 0px;
-    top: 0px;
-}
-
 </style>
