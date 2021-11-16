@@ -1,5 +1,6 @@
 <template>
     <h1>这是关于页</h1>
+    <Heading :level="2">Hello JSX</Heading>
     <br />
     <p>鼠标位置：{{ x }},{{ y }}</p>
     <br />
@@ -20,6 +21,7 @@ import { useMouse } from '../utils/mouse'
 import { useFavicon } from '../utils/useFavicon';
 import {useFullscreen} from '@vueuse/core'
 import Rate from '../components/Rate.vue';
+import Heading from '../components/Heading.jsx'
 import {ref} from 'vue'
 
 const { x, y } = useMouse()
