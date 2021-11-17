@@ -35,26 +35,15 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 
-import { ref, Ref, computed, reactive } from 'vue';
+import { ref, computed, reactive } from 'vue';
 import { useStorage } from '../utils/useStorage'
 
 function useTodos() {
-
-    interface Todo {
-        title:string,
-        done: boolean
-    }
-
     let title = ref("")
     let showModal = ref(false)
-    // let todos = useStorage('todos', [
-    //     { title: '学习Vue', done: false },
-    //     { title: '学习React', done: false },
-    // ])
-
-    let todos: Ref<Todo[]> = useStorage('todos', [
+    let todos = useStorage('todos', [
         { title: '学习Vue', done: false },
         { title: '学习React', done: false },
     ])
