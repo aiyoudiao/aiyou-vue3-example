@@ -128,7 +128,7 @@ let { title, todos, addTodo, clear, active, all, allDone, showModal, removeTodo,
 
 </script>
 
-<style lang="scss" scoped>
+<style>
 h1 {
     color: red;
 }
@@ -191,27 +191,6 @@ h1 {
     position: fixed;
     right: 0px;
     top: 0px;
-}
-
-
-$padding: 10px;
-$white: #fff;
-
-ul {
-    width: 500px;
-    margin: 0 auto;
-    padding: 0;
-    li {
-        &:hover {
-            cursor: pointer;
-        }
-
-        list-style-type: node;
-        margin-bottom: $padding;
-        padding: $padding;
-        background: $white;
-        box-shadow: 1px 3px 5px rgba(0,0,0,0.1)
-    }
 }
 
 </style>
